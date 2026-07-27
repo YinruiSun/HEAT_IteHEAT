@@ -502,7 +502,7 @@ end = Sys.time()
 
 # running time
 print(end - start)</code></pre>
-<pre><code>## Time difference of 55.2336 secs</code></pre>
+<pre><code>## Time difference of 55.04535 secs</code></pre>
 <pre class="r"><code># HEAT &amp; IteHEAT with scad thresholding
 start = Sys.time()
 fit_heat_scad = heat(X = X, nite_max = 5, ite_stop = TRUE, threshold_uv = &quot;scad&quot;, threshold_mv = &quot;scad&quot;)
@@ -510,7 +510,7 @@ end = Sys.time()
 
 # running time
 print(end - start)</code></pre>
-<pre><code>## Time difference of 58.28478 secs</code></pre>
+<pre><code>## Time difference of 56.38181 secs</code></pre>
 <pre class="r"><code># nodewiseLasso
 X_bind = Reduce(rbind, X)
 start = Sys.time()
@@ -519,7 +519,7 @@ end = Sys.time()
 
 # running time
 end - start</code></pre>
-<pre><code>## Time difference of 3.555794 secs</code></pre>
+<pre><code>## Time difference of 3.550292 secs</code></pre>
 <p>Summarize the estimation errors for different methods.</p>
 <pre class="r"><code>loss_name = c(&quot;L11_1&quot;, &quot;L11_2&quot;, &quot;L11_F&quot;, &quot;L21_1&quot;, &quot;L21_2&quot;, &quot;L21_F&quot;)</code></pre>
 <pre class="r"><code># integrative estimation error for (Ite)HEAT-soft
@@ -528,30 +528,30 @@ loss = mapply(loss_mat, fit_heat_soft$Omega_est_integrate, list(Omega), list(n_s
 loss = rbind(loss_init, t(loss))
 
 colnames(loss) = loss_name
-rownames(loss) = c(&quot;Initial&quot;, paste0(&quot;Iteration &quot;, seq_len(nrow(loss) - 1)))
+rownames(loss) = c(&quot;Initial&quot;, paste0(&quot;Iteration-&quot;, seq_len(nrow(loss) - 1)))
 
 # estimation errors
 print(loss)</code></pre>
 <pre><code>##                L11_1     L11_2      L11_F    L21_1     L21_2      L21_F
 ## Initial     2.284095 1.2010312 0.13838421 2.338960 1.3559535 0.16058388
-## Iteration 1 1.228428 0.7484808 0.06067477 1.228428 0.7484808 0.06067477
-## Iteration 2 1.067026 0.7067525 0.06058909 1.067026 0.7067525 0.06058909
-## Iteration 3 0.968302 0.6742044 0.05857585 0.968302 0.6742044 0.05857585</code></pre>
+## Iteration-1 1.228428 0.7484808 0.06067477 1.228428 0.7484808 0.06067477
+## Iteration-2 1.067026 0.7067525 0.06058909 1.067026 0.7067525 0.06058909
+## Iteration-3 0.968302 0.6742044 0.05857585 0.968302 0.6742044 0.05857585</code></pre>
 <pre class="r"><code># integrative estimation error for (Ite)HEAT-scad
 loss_init = loss_mat(fit_heat_scad$Omega_est_init, Omega, n_seq, 1) # vector, length = 6
 loss = mapply(loss_mat, fit_heat_scad$Omega_est_integrate, list(Omega), list(n_seq), 1) # matrix, dim = 6 * nite
 loss = rbind(loss_init, t(loss))
 
 colnames(loss) = loss_name
-rownames(loss) = c(&quot;Initial&quot;, paste0(&quot;Iteration &quot;, seq_len(nrow(loss) - 1)))
+rownames(loss) = c(&quot;Initial&quot;, paste0(&quot;Iteration-&quot;, seq_len(nrow(loss) - 1)))
 
 # estimation errors
 print(loss)</code></pre>
 <pre><code>##                 L11_1     L11_2      L11_F     L21_1     L21_2      L21_F
 ## Initial     2.2840948 1.2010312 0.13838421 2.3389603 1.3559535 0.16058388
-## Iteration 1 0.8059571 0.4641680 0.02545039 0.8059571 0.4641680 0.02545039
-## Iteration 2 0.5330434 0.3307299 0.01518811 0.5330434 0.3307299 0.01518811
-## Iteration 3 0.5436690 0.3593740 0.01896796 0.5436690 0.3593740 0.01896796</code></pre>
+## Iteration-1 0.8059571 0.4641680 0.02545039 0.8059571 0.4641680 0.02545039
+## Iteration-2 0.5330434 0.3307299 0.01518811 0.5330434 0.3307299 0.01518811
+## Iteration-3 0.5436690 0.3593740 0.01896796 0.5436690 0.3593740 0.01896796</code></pre>
 <pre class="r"><code># integrative estimation error for nodewiseLasso
 loss = loss_mat(rep(list(fit_nodewiseLasso$Omega_est), M), Omega, n_seq, 1) # vector, length = 6
 
@@ -591,7 +591,7 @@ end = Sys.time()
 
 # running time
 end - start</code></pre>
-<pre><code>## Time difference of 55.07924 secs</code></pre>
+<pre><code>## Time difference of 53.70123 secs</code></pre>
 <pre class="r"><code># HEAT &amp; IteHEAT with scad thresholding
 start = Sys.time()
 fit_heat_scad = heat(X = X, nite_max = 5, ite_stop = TRUE, threshold_uv = &quot;scad&quot;, threshold_mv = &quot;scad&quot;)
@@ -599,7 +599,7 @@ end = Sys.time()
 
 # running time
 end - start</code></pre>
-<pre><code>## Time difference of 42.41188 secs</code></pre>
+<pre><code>## Time difference of 41.30738 secs</code></pre>
 <pre class="r"><code># JGL
 start = Sys.time()
 fit_jgl = jgl_fun(X)
@@ -607,7 +607,7 @@ end = Sys.time()
 
 # running time
 end - start</code></pre>
-<pre><code>## Time difference of 3.949876 mins</code></pre>
+<pre><code>## Time difference of 3.969932 mins</code></pre>
 <pre class="r"><code># HGSL
 start = Sys.time()
 fit_hgsl = hgsl_fun(X)
@@ -615,7 +615,7 @@ end = Sys.time()
 
 # running time
 end - start</code></pre>
-<pre><code>## Time difference of 6.362264 mins</code></pre>
+<pre><code>## Time difference of 6.381246 mins</code></pre>
 <p>Summarize the estimation errors for different methods.</p>
 <pre class="r"><code>loss_name = c(&quot;L11_1&quot;, &quot;L11_2&quot;, &quot;L11_F&quot;, &quot;L21_1&quot;, &quot;L21_2&quot;, &quot;L21_F&quot;)</code></pre>
 <pre class="r"><code># integrative estimation error for (Ite)HEAT-soft
@@ -624,29 +624,29 @@ loss = mapply(loss_mat, fit_heat_soft$Omega_est_integrate, list(Omega), list(n_s
 loss = rbind(loss_init, t(loss))
 
 colnames(loss) = loss_name
-rownames(loss) = c(&quot;Initial&quot;, paste0(&quot;Iteration &quot;, seq_len(nrow(loss) - 1)))
+rownames(loss) = c(&quot;Initial&quot;, paste0(&quot;Iteration-&quot;, seq_len(nrow(loss) - 1)))
 
 # estimation errors
 print(loss)</code></pre>
 <pre><code>##                L11_1    L11_2     L11_F    L21_1    L21_2     L21_F
 ## Initial     2.076236 1.167957 0.1451826 2.218630 1.324684 0.1697851
-## Iteration 1 1.755916 1.013271 0.1269261 1.816258 1.062218 0.1396239
-## Iteration 2 1.721017 1.005135 0.1289571 1.780659 1.050970 0.1410918
-## Iteration 3 1.708447 1.005346 0.1292583 1.768804 1.050330 0.1413949</code></pre>
+## Iteration-1 1.755916 1.013271 0.1269261 1.816258 1.062218 0.1396239
+## Iteration-2 1.721017 1.005135 0.1289571 1.780659 1.050970 0.1410918
+## Iteration-3 1.708447 1.005346 0.1292583 1.768804 1.050330 0.1413949</code></pre>
 <pre class="r"><code># integrative estimation error for (Ite)HEAT-scad
 loss_init = loss_mat(fit_heat_scad$Omega_est_init, Omega, n_seq, 1) # vector, length = 6
 loss = mapply(loss_mat, fit_heat_scad$Omega_est_integrate, list(Omega), list(n_seq), 1) # matrix, dim = 6 * nite
 loss = rbind(loss_init, t(loss))
 
 colnames(loss) = loss_name
-rownames(loss) = c(&quot;Initial&quot;, paste0(&quot;Iteration &quot;, seq_len(nrow(loss) - 1)))
+rownames(loss) = c(&quot;Initial&quot;, paste0(&quot;Iteration-&quot;, seq_len(nrow(loss) - 1)))
 
 # estimation errors
 print(loss)</code></pre>
 <pre><code>##                L11_1     L11_2      L11_F    L21_1     L21_2      L21_F
 ## Initial     2.076236 1.1679572 0.14518258 2.218630 1.3246844 0.16978508
-## Iteration 1 1.344444 0.7441924 0.07034527 1.421712 0.7971801 0.08249907
-## Iteration 2 1.192256 0.6914729 0.06130618 1.281745 0.7388902 0.07275463</code></pre>
+## Iteration-1 1.344444 0.7441924 0.07034527 1.421712 0.7971801 0.08249907
+## Iteration-2 1.192256 0.6914729 0.06130618 1.281745 0.7388902 0.07275463</code></pre>
 <pre class="r"><code># integrative estimation error for JGL
 loss = loss_mat(fit_jgl$Omega_est, Omega, n_seq, 1) # vector, length = 6
 
