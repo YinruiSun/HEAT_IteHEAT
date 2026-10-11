@@ -2,7 +2,7 @@
 
 Codes for article:
 
-**Yinrui Sun & Yin Xia. Optimal Integrative Estimation for Distributed Precision Matrices with Heterogeneity Adjustment. _The Annals of Statistics_, 54(5), 2209-2233.**
+**Yinrui Sun & Yin Xia (2026). Optimal Integrative Estimation for Distributed Precision Matrices with Heterogeneity Adjustment. _The Annals of Statistics_, 54(5), 2209-2233.**
 
 The file `functions.r` includes the codes to implement the proposed `HEAT` and `IteHEAT` methods.
 
